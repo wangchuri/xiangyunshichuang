@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>湖南湘云实创科技有限公司 - 招聘</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: auto;
+            overflow-y: auto;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            background: white;
+            color: #333;
+        }
+
+        .container {
+            height: auto;
+            overflow-y: visible;
+            scroll-snap-type: none;
+            padding-top: 100px;
+        }
+
+        section {
+            min-height: 100vh;
+            height: auto;
+            scroll-snap-align: none;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: visible;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 装饰元素 */
+        .decoration {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .circle {
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* 头部样式 */
+        .header {
+            background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+            color: white;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .company-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .company-logo {
+            text-align: center;
+        }
+
+        .company-logo img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 2rem;
+        }
+
+        .company-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 招聘岗位样式 */
+        .job {
+            background: linear-gradient(45deg, #ffffff 0%, #f5f5f5 100%);
+        }
+
+        .job-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .job-header {
+            flex-shrink: 0;
+        }
+
+        .job-title {
+            color: #2196F3;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .job-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #2196F3;
+        }
+
+        .platform-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+
+        .platform-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .platform-icon i {
+            font-size: 2rem;
+            color: #1A237E;
+            background: rgba(33, 150, 243, 0.1);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .platform-icon:hover i {
+            transform: scale(1.1);
+        }
+
+        .job-highlights {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-tag {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .highlight-tag:hover {
+            transform: translateY(-3px);
+        }
+
+        .duties-container {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .duties-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .duties-card h3 {
+            color: #1A237E;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .duties-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .duties-card li {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .duties-card li::before {
+            content: "•";
+            color: #2196F3;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* 任职要求样式 */
+        .requirements {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .requirement-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .requirement-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 薪资待遇样式 */
+        .salary {
+            background: linear-gradient(135deg, #FF9800 0%, #FB8C00 100%);
+            color: white;
+        }
+
+        .salary-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .salary-cards-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto auto;
+            gap: 2rem;
+            justify-items: center;
+            align-items: start;
+        }
+
+        .salary-card {
+            width: clamp(180px, 30vw, 250px);
+            height: clamp(180px, 30vw, 250px);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            
+            /* 立体阴影效果 */
+            box-shadow: 
+                inset 0 0 50px rgba(255,255,255,0.8),
+                -5px -5px 15px rgba(255,255,255,0.8),
+                5px 5px 15px rgba(70,70,70,0.2),
+                inset -5px -5px 15px rgba(70,70,70,0.2),
+                inset 5px 5px 15px rgba(255,255,255,0.8);
+        }
+
+        .salary-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .salary-card:last-child {
+            grid-column: 1 / -1;
+            transform: translateY(-30%);
+        }
+
+        .salary-card:last-child:hover {
+            transform: translateY(-35%);
+        }
+
+        .salary-card i {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .salary-card h3 {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            margin-bottom: 0.3rem;
+        }
+
+        .salary-card p {
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
+            margin: 0.2rem 0;
+        }
+
+        .promotion-path {
+            margin-top: 0;
+            padding-top: 1rem;
+        }
+
+        .path-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .path-step {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .path-arrow {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, #e0e0e0, #9e9e9e);
+            position: relative;
+            margin: 0 0.5rem;
+        }
+
+        .path-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid #9e9e9e;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+            section {
+                padding: 2rem 1rem;
+            }
+
+            /* 企业介绍响应式 */
+            .company-info {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+
+            .company-stats {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-card {
+                height: 120px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            /* 招聘岗位响应式 */
+            .job-content {
+                padding: 1rem;
+            }
+
+            .job-header {
+                margin-bottom: 1.5rem;
+            }
+
+            .job-title {
+                font-size: clamp(1.2rem, 4vw, 1.8rem);
+            }
+
+            .platform-icons {
+                gap: 1rem;
+            }
+
+            .platform-icon i {
+                font-size: clamp(1rem, 3vw, 1.5rem);
+                width: clamp(40px, 10vw, 50px);
+                height: clamp(40px, 10vw, 50px);
+            }
+
+            .platform-icon span {
+                font-size: clamp(0.7rem, 2vw, 0.9rem);
+            }
+
+            .highlight-tag {
+                font-size: clamp(0.7rem, 2vw, 0.9rem);
+                padding: 0.5rem 0.8rem;
+            }
+
+            .duties-card {
+                padding: 1rem;
+            }
+
+            .duties-card h3 {
+                font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            }
+
+            .duties-card li {
+                font-size: clamp(0.8rem, 2vw, 1rem);
+                margin: 0.5rem 0;
+            }
+
+            /* 任职要求响应式 */
+            .requirements-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .requirement-card {
+                height: 150px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            /* 薪资待遇响应式 */
+            .salary-cards-container {
+                gap: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .salary-card {
+                width: clamp(100px, 40vw, 150px);
+                height: clamp(100px, 40vw, 150px);
+            }
+
+            .path-steps {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .path-arrow {
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
+            }
+
+            /* 标题响应式 */
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            /* 内容间距响应式 */
+            .content-wrapper {
+                padding: 0 1rem;
+            }
+
+            .fixed-logo {
+                width: 140px;
+                height: 70px;
+            }
+
+            .fixed-logo.scrolled {
+                width: 100px;
+                height: 50px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .qr-code {
+                order: -1;
+            }
+        }
+
+        /* 平板设备响应式 */
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            .content-wrapper {
+                max-width: 90%;
+            }
+
+            .company-stats,
+            .requirements-grid,
+            .salary-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 横屏手机响应式 */
+        @media screen and (max-height: 500px) {
+            section {
+                padding: 1rem;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .company-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .path-steps {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* 优化触摸设备的交互 */
+        @media (hover: none) {
+            .stat-card:hover,
+            .requirement-card:hover,
+            .salary-card:hover,
+            .highlight-tag:hover {
+                transform: none;
+            }
+
+            .platform-icon:hover i {
+                transform: none;
+            }
+        }
+
+        /* 适配不同设备的字体大小 */
+        html {
+            font-size: 16px;
+        }
+
+        @media screen and (max-width: 320px) {
+            html {
+                font-size: 14px;
+            }
+        }
+
+        /* 优化移动端滚动体验 */
+        @media (pointer: coarse) {
+            .container {
+                scroll-snap-type: y proximity;
+            }
+        }
+
+        /* 确保内容不会被底部导航栏遮挡 */
+        @supports (padding: env(safe-area-inset-bottom)) {
+            section {
+                padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+            }
+        }
+
+        /* 优化移动端点击区域 */
+        @media (pointer: coarse) {
+            button,
+            .highlight-tag,
+            .platform-icon {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        /* 添加移动端友好的滚动指示器 */
+        .scroll-indicator {
+            display: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .scroll-indicator {
+                display: block;
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                z-index: 1000;
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            .scroll-indicator.visible {
+                opacity: 1;
+            }
+        }
+
+        /* 统一的卡片样式 */
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        /* 统一的动画效果 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 统一的间距 */
+        .section-padding {
+            padding: clamp(1rem, 5vw, 3rem);
+        }
+
+        /* 统一的字体大小 */
+        :root {
+            --h1-size: clamp(1.8rem, 4vw, 2.5rem);
+            --h2-size: clamp(1.5rem, 3vw, 2rem);
+            --h3-size: clamp(1.2rem, 2vw, 1.5rem);
+            --p-size: clamp(0.9rem, 1.5vw, 1.1rem);
+        }
+
+        h1 { font-size: var(--h1-size); }
+        h2 { font-size: var(--h2-size); }
+        h3 { font-size: var(--h3-size); }
+        p { font-size: var(--p-size); }
+
+        /* 统一的图标大小 */
+        .icon {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+        }
+
+        /* 标题居中样式 */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: currentColor;
+        }
+
+        /* 确保内容完整显示 */
+        @media screen and (max-height: 700px) {
+            section {
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .salary-card:last-child {
+                transform: translateY(-20%);
+            }
+        }
+
+        /* Logo固定定位 */
+        .fixed-logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            width: 180px;
+            height: 90px;
+            transition: all 0.3s ease;
+            background: transparent; /* 透明背景 */
+        }
+
+        .fixed-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .fixed-logo.scrolled {
+            width: 120px;
+            height: 60px;
+        }
+
+        /* 统一的配色方案 */
+        .icon-primary {
+            color: #1A237E;
+        }
+
+        .icon-secondary {
+            color: #2196F3;
+        }
+
+        /* 联系方式页面样式更新 */
+        .contact-section {
+            background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+            color: white;
+            padding: 4rem 2rem;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-section .section-title {
+            color: white;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .qr-code-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .qr-code-wrapper {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .qr-code-wrapper:hover {
+            transform: translateY(-10px);
+        }
+
+        .qr-code-wrapper img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+        }
+
+        .qr-code-wrapper p {
+            color: #1A237E;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            width: 280px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        .contact-text h3 {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-text p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        /* 响应式调整 */
+        @media screen and (max-width: 968px) {
+            .contact-container {
+                flex-direction: column-reverse;
+                gap: 3rem;
+            }
+
+            .contact-info {
+                width: 100%;
+            }
+
+            .contact-item {
+                transform: translateX(0) translateY(30px);
+            }
+
+            .qr-code-container {
+                transform: translateY(-30px);
+            }
+
+            .qr-code-wrapper img {
+                width: 180px;
+                height: 180px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .contact-section {
+                padding: 4rem 1rem 2rem;
+            }
+
+            .contact-item {
+                padding: 1rem;
+            }
+
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .qr-code-wrapper img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 添加滚动指示器 -->
+    <div class="scroll-indicator">向上滑动查看更多</div>
+
+    <!-- 添加固定Logo -->
+    <div class="fixed-logo">
+        <img src="logo.jpg" alt="湘云实创logo">
+    </div>
+
+    <div class="container">
+        <!-- 企业介绍 -->
+        <section class="header section-padding">
+            <div class="content-wrapper">
+                <div class="company-info fade-in-up">
+                    <div class="company-intro">
+                        <h1>湖南湘云实创科技有限公司</h1>
+                        <p class="slogan">技术驱动·运营扎根</p>
+                        <p class="company-desc">
+                            成立于2019年，专注于视频号的技术（基于AIGC）运营型公司。集AI工具研发、短视频IP打造、数字人矩阵获客、跨境电商（TIKTOK）的互联网企业。
+                        </p>
+                    </div>
+                    <div class="company-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-chart-line fa-2x"></i>
+                            <h3>GMV</h3>
+                            <p>累计超亿元</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-handshake fa-2x"></i>
+                            <h3>合作伙伴</h3>
+                            <p>中石化、湖南广电</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-graduation-cap fa-2x"></i>
+                            <h3>战略合作</h3>
+                            <p>湖南工商大学</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-users fa-2x"></i>
+                            <h3>人才培养</h3>
+                            <p>新媒体运营人才基地</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 合并的招聘信息部分 -->
+        <section class="recruitment-section">
+            <div class="recruitment-container">
+                <!-- 招聘岗位 -->
+                <div class="job-section">
+                    <h2 class="section-title">招募短视频运营助理 × 3名</h2>
+                    <div class="job-content fade-in-up">
+                        <div class="job-header">
+                            <div class="platform-icons">
+                                <div class="platform-icon">
+                                    <i class="fab fa-tiktok"></i>
+                                    <span>抖音</span>
+                                </div>
+                                <div class="platform-icon">
+                                    <i class="fas fa-video"></i>
+                                    <span>视频号</span>
+                                </div>
+                                <div class="platform-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>快手</span>
+                                </div>
+                                <div class="platform-icon">
+                                    <i class="fas fa-heart"></i>
+                                    <span>小红书</span>
+                                </div>
+                            </div>
+                            <div class="job-highlights">
+                                <span class="highlight-tag">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    无需出差
+                                </span>
+                                <span class="highlight-tag">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    专业培训
+                                </span>
+                                <span class="highlight-tag">
+                                    <i class="fas fa-chart-line"></i>
+                                    晋升空间大
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="duties-container">
+                            <div class="duties-card">
+                                <h3><i class="fas fa-tasks"></i> 核心职责</h3>
+                                <ul>
+                                    <li>负责各平台视频内容发布与流量统计</li>
+                                    <li>负责平台私信、评论互动与私域引流</li>
+                                    <li>负责账号数据分析与内容策划建议</li>
+                                </ul>
+                            </div>
+                            <div class="duties-card">
+                                <h3><i class="fas fa-star"></i> 工作内容</h3>
+                                <ul>
+                                    <li>负责数字人短视频制作与优化调整</li>
+                                    <li>负责外出口播、Vlog类视频拍摄剪辑</li>
+                                    <li>负责团队内部工作对接与协同</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 任职要求 -->
+                <div class="requirements-section">
+                    <h2 class="section-title">任职要求</h2>
+                    <div class="requirements-grid fade-in-up">
+                        <div class="requirement-card">
+                            <i class="fas fa-user-graduate fa-2x"></i>
+                            <h3>专业背景</h3>
+                            <p>2025届媒体相关专业优先</p>
+                        </div>
+                        <div class="requirement-card">
+                            <i class="fas fa-heart fa-2x"></i>
+                            <h3>兴趣特长</h3>
+                            <p>热爱短视频、网感强，性格外向</p>
+                        </div>
+                        <div class="requirement-card">
+                            <i class="fas fa-mobile-alt fa-2x"></i>
+                            <h3>平台经验</h3>
+                            <p>短视频平台重度爱好者优先</p>
+                        </div>
+                        <div class="requirement-card">
+                            <i class="fas fa-brain fa-2x"></i>
+                            <h3>个人素质</h3>
+                            <p>学习能力强、创造力强、责任心强</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 薪资待遇 -->
+                <div class="salary-section">
+                    <h2 class="section-title fade-slide-up">薪资待遇</h2>
+                    <div class="salary-cards-container stagger-fade-in">
+                        <div class="salary-card">
+                            <i class="fas fa-money-bill-wave fa-2x"></i>
+                            <h3>实习期</h3>
+                            <p>2500元/月</p>
+                        </div>
+                        <div class="salary-card">
+                            <i class="fas fa-award fa-2x"></i>
+                            <h3>转正后</h3>
+                            <p>3000底薪</p>
+                            <p>+500全勤</p>
+                            <p>+奖金提成</p>
+                        </div>
+                        <div class="salary-card">
+                            <i class="fas fa-book fa-2x"></i>
+                            <h3>培训福利</h3>
+                            <p>专业培训</p>
+                            <p>2-3个月试用期</p>
+                        </div>
+                    </div>
+                    
+                    <div class="promotion-path">
+                        <h3 class="section-title">职业发展路径</h3>
+                        <div class="path-steps">
+                            <div class="path-step">运营助理</div>
+                            <div class="path-arrow"></div>
+                            <div class="path-step">运营专员</div>
+                            <div class="path-arrow"></div>
+                            <div class="path-step">运营经理</div>
+                            <div class="path-arrow"></div>
+                            <div class="path-step">部门总监</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 添加联系方式section -->
+        <section class="contact-section">
+            <h2 class="section-title">联系我们</h2>
+            <div class="contact-container">
+                <div class="qr-code-container">
+                    <div class="qr-code-wrapper">
+                        <img src="er_ma.jpg" alt="微信二维码">
+                        <p>扫码添加微信</p>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>联系电话</h3>
+                            <p>15211036688</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>电子邮箱</h3>
+                            <p>2163605227@qq.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>公司地址</h3>
+                            <p>湖南工商大学创客工场 107</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 添加滚动指示器的显示逻辑
+        document.addEventListener('DOMContentLoaded', function() {
+            const indicator = document.querySelector('.scroll-indicator');
+            let timer;
+
+            function showIndicator() {
+                indicator.classList.add('visible');
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    indicator.classList.remove('visible');
+                }, 2000);
+            }
+
+            // 首次加载显示
+            showIndicator();
+
+            // 滚动时显示
+            document.querySelector('.container').addEventListener('scroll', () => {
+                showIndicator();
+            });
+        });
+
+        // 优化滚动动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // 触发子元素动画
+                    entry.target.querySelectorAll('.fade-slide-up, .stagger-fade-in, .section-content').forEach(el => {
+                        el.classList.add('visible');
+                    });
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -10% 0px'
+        });
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 观察所有需要动画的元素
+            document.querySelectorAll('section, .fade-slide-up, .stagger-fade-in, .section-content').forEach(el => {
+                observer.observe(el);
+            });
+
+            // 确保首屏内容可见
+            const firstSection = document.querySelector('section');
+            if (firstSection) {
+                firstSection.classList.add('visible');
+                firstSection.querySelectorAll('.fade-slide-up, .stagger-fade-in, .section-content').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }
+
+            // 滚动时缩放logo
+            window.addEventListener('scroll', () => {
+                const logo = document.querySelector('.fixed-logo');
+                if (window.scrollY > 100) {
+                    logo.classList.add('scrolled');
+                } else {
+                    logo.classList.remove('scrolled');
+                }
+            });
+        });
+
+        // 添加到现有的observer逻辑中
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('contact-item')) {
+                            entry.target.classList.add('visible');
+                        }
+                        if (entry.target.classList.contains('qr-code-container')) {
+                            entry.target.classList.add('visible');
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            // 观察联系方式元素
+            document.querySelectorAll('.contact-item, .qr-code-container').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html> 
